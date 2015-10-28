@@ -42,6 +42,7 @@ function vkExUnit_get_sns_options_default() {
 		'enableSnsBtns' 		=> true,
 		'enableFollowMe' 		=> true,
 		'followMe_title'		=> 'Follow me!',
+		'SnsBtn_enable_posttype'=> array(),
 	);
 	return apply_filters( 'vkExUnit_sns_options_default', $default_options );
 }
@@ -63,8 +64,57 @@ function vkExUnit_sns_options_validate( $input ) {
 	$output['enableFollowMe']  			= ( isset( $input['enableFollowMe'] ) && isset( $input['enableFollowMe'] ) == 'true' )? true: false;
 	$output['followMe_title']			= $input['followMe_title'];
 
+	$output['SnsBtn_enable_posttype'] = array();
+	$post_types = vkExUnit_sns_get_post_types();
+	foreach( $post_types as $post_type ){
+		$output['SnsBtn_enable_posttype'][$post_type] = ( isset( $input['SnsBtn_enable_posttype'][$post_type] ) && $input['SnsBtn_enable_posttype'][$post_type] == 'true' )? true : false;
+	}
 	return apply_filters( 'vkExUnit_sns_options_validate', $output, $input, $defaults );
 }
+
+
+
+function vkExUnit_sns_get_post_types() {
+	return array_merge( array( 'post' => 'post', 'page' => 'page' ), get_post_types( array( '_builtin' => false, 'public' => true ) ) );
+}
+
+
+
+add_action( 'admin_menu', 'vkExUnit_sns_set_meta_box' );
+function vkExUnit_sns_set_meta_box() {
+	foreach ( vkExUnit_sns_get_post_types() as $post_type ) {
+		add_meta_box( 'vkExUnit_sns', __( 'SNS buttons', 'vkExUnit' ), 'vkExUnit_sns_render_meta_box' , $post_type, 'normal', 'nomral' );
+	}
+}
+
+
+
+function vkExUnit_sns_render_meta_box() {
+	$disable_sns = get_post_meta( get_the_id(), 'vkExUnit_sns_disable', true );
+
+	echo '<input type="hidden" name="_nonce_vkExUnit_custom_sns_disable" id="_nonce_vkExUnit__custom_sns_disable_noonce" value="'.wp_create_nonce( 'vkExUnit_sns' ).'" />';
+	echo '<label><input type="checkbox" name="vkExUnit_sns_disable" value="true" ' . ( ($disable_sns)? 'checked' : '' ) . ' />'.__( 'Do not set SNS bar.', 'vkExUnit' ).'</label>';
+}
+
+
+
+add_action( 'save_post', 'vkExUnit_sns_save_customfield' );
+function vkExUnit_sns_save_customfield( $post_id ) {
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return $post_id; }
+
+	$noonce = isset( $_POST['_nonce_vkExUnit_custom_sns_disable'] ) ? htmlspecialchars( $_POST['_nonce_vkExUnit_custom_sns_disable'] ) : null;
+	if ( ! wp_verify_nonce( $noonce, 'vkExUnit_sns' ) ) {
+		return $post_id;
+	}
+
+	if ( isset( $_POST['vkExUnit_sns_disable'] ) && $_POST['vkExUnit_sns_disable'] == 'true' ){
+		update_post_meta( $post_id, 'vkExUnit_sns_disable', true );
+	} else {
+		delete_post_meta( $post_id, 'vkExUnit_sns_disable' );
+	}
+}
+
 
 /*-------------------------------------------*/
 /*  set global

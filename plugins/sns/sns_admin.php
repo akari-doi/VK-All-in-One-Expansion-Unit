@@ -57,6 +57,17 @@
 <td><label><input type="checkbox" name="vkExUnit_sns_options[enableSnsBtns]" id="enableSnsBtns" value="true" <?php echo ( $options['enableSnsBtns'] )? 'checked': ''; ?> /><?php _e( 'Print the social bookmark buttons', 'vkExUnit' );?></label></td>
 </tr>
 
+<tr><td></td><th>
+<?php
+	$post_types = array_merge( array( 'post' => 'post', 'page' => 'page' ), get_post_types( array( '_builtin' => false, 'public' => true ) ) );
+?>
+<ul>
+<?php foreach( $post_types as $type ): ?>
+	<li><label><input type="checkbox"  name="vkExUnit_sns_options[SnsBtn_enable_posttype][<?php echo $type; ?>]" value="true" <?php if( ! isset( $options['SnsBtn_enable_posttype'][$type] ) || $options['SnsBtn_enable_posttype'][$type] ) echo 'checked'; ?> /><?php echo $type; ?></label></li>
+<?php endforeach; ?>
+</ul>
+</th></tr>
+
 <tr>
 <th><label for="enableFollowMe"><?php _e( 'Follow me box', 'vkExUnit' ); ?></label></th>
 <td><label><input type="checkbox" name="vkExUnit_sns_options[enableFollowMe]" id="enableFollowMe" value="true" <?php echo ( $options['enableFollowMe'] )? 'checked': ''; ?> /><?php _e( 'Print the Follow me box', 'vkExUnit' );?></label>
@@ -66,7 +77,6 @@
 </dl>
 </td>
 </tr>
-
 </table>
 
 <?php submit_button(); ?>

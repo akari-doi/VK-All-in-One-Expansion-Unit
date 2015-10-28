@@ -8,6 +8,11 @@ function vkExUnit_add_snsBtns( $content ) {
 	if ( $is_pagewidget ) { return $content; }
 
 	if ( is_single() || is_page() ) :
+		$post_type = get_post_type();
+		$options = vkExUnit_get_sns_options();
+		if ( isset( $options['SnsBtn_enable_posttype'][$post_type] ) && ! $options['SnsBtn_enable_posttype'][$post_type] ) return $content;
+		if( get_post_meta( get_the_id(), 'vkExUnit_sns_disable', true) ) return $content;
+
 		if ( is_home() || is_front_page() ) {
 			$linkUrl = home_url();
 			$twitterUrl = home_url();
