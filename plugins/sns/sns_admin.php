@@ -77,6 +77,10 @@ _e( 'example', 'vkExUnit'); ?>
 <dt><?php _e( 'Follow me box title', 'vkExUnit' ); ?></dt>
 <dd><input type="text" name="vkExUnit_sns_options[followMe_title]" id="followMe_title" value="<?php echo esc_attr( $options['followMe_title'] ); ?>" /></dd>
 </dl>
+<dl>
+<dt><a href="https://push7.jp/" target="_blank">Push7</a> APPNO</dt>
+<dd><input type="text" name="vkExUnit_sns_options[push7Id]" id="push7Id" value="<?php echo esc_attr( $options['push7Id'] ); ?>" /></dd>
+</dl>
 </td>
 </tr>
 

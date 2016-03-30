@@ -37,6 +37,7 @@ function vkExUnit_get_sns_options_default() {
 		'fbPageUrl' 			=> '',
 		'ogImage' 				=> '',
 		'twitterId' 			=> '',
+		'push7Id' 				=> '',
 		'enableOGTags' 			=> true,
 		'enableTwitterCardTags' => true,
 		'enableSnsBtns' 		=> true,
@@ -58,6 +59,7 @@ function vkExUnit_sns_options_validate( $input ) {
 	$output['fbPageUrl']				= $input['fbPageUrl'];
 	$output['ogImage']					= $input['ogImage'];
 	$output['twitterId']				= $input['twitterId'];
+	$output['push7Id']					= $input['push7Id'];
 	$output['SnsBtn_igronePost']		= preg_replace('/[^0-9,]/', '', $input['SnsBtn_igronePost']);
 	$output['enableOGTags']  			= ( isset( $input['enableOGTags'] ) && isset( $input['enableOGTags'] ) == 'true' )? true: false;
 	$output['enableTwitterCardTags']  	= ( isset( $input['enableTwitterCardTags'] ) && isset( $input['enableTwitterCardTags'] ) == 'true' )? true: false;

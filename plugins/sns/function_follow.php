@@ -35,6 +35,12 @@ function vkExUnit_add_follow( $content ) {
 		}
 
 		$follow_html .= '<div class="follow_btn follow_feedly"><a href="http://cloud.feedly.com/#subscription/feed/'.home_url().'/feed/" target="blank"><img id="feedlyFollow" src="http://s3.feedly.com/img/follows/feedly-follow-rectangle-volume-small_2x.png" alt="follow us in feedly" width="66" height="20"></a></div>'."\n";
+
+		if ( isset( $options['push7Id'] )) {
+			$follow_html .= '<div class="follow_btn follow_push7"><div class="p7-b" data-p7id="'.esc_attr($options['push7Id']).'" data-p7c="r"></div>
+	<script src="https://sk8life.app.push7.jp/static/button/p7.js"></script></div>'."\n";
+		}
+
 		$follow_html .= '</div><!-- [ /.followSet_body ] -->'."\n";
 		$follow_html .= '</section><!-- [ /.followSet ] -->'."\n";
 
