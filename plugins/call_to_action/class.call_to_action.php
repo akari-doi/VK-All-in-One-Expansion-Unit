@@ -26,6 +26,7 @@ class vExUnit_call_responce {
 		add_action( 'init', array( $this, 'set_posttype' ) );
 		add_action( 'admin_init', array( $this, 'option_init' ) );
 		add_action( 'admin_menu', array( $this, 'add_custom_field' ) );
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'load_wp_media_files' ) );
 		add_action( 'save_post', array( $this, 'save_custom_field' ) );
 		add_filter( 'the_content', array( $this, 'content_filter' ), $this->content_number, 1 );
 	}
@@ -328,7 +329,7 @@ jQuery(document).ready(function($){
 
 	public static function is_pagewidget() {
 		global $is_pagewidget;
-		return ($is_pagewidget)? true : false;
+		return (boolean) $is_pagewidget;
 	}
 
 
@@ -400,4 +401,10 @@ jQuery(document).ready(function($){
 
 		include vkExUnit_get_directory() . '/plugins/call_to_action/view.adminsetting.php';
 	}
+
+
+	public static function load_wp_media_files() {
+		if( get_post_type() == 'cta' ) wp_enqueue_media();
+	}
 }
+
