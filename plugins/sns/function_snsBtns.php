@@ -56,7 +56,7 @@ function vkExUnit_add_snsBtns( $content ) {
 			<a href="line://msg/text/'.$pageTitle.' '.$linkUrl.'"><span class="vk_icon_w_r_sns_line icon_sns"></span><span class="sns_txt">LINE</span></a></li>';
 			endif;
 			// pocket
-			$socialSet .= '<li class="sb_pocket sb_icon"><a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en" href="http://getpocket.com/edit?url='.$linkUrl.'&title='.$pageTitle.'" target="_blank" onclick="window.open(this.href, FBwindow, width=550, height=350, menubar=no, toolbar=no, scrollbars=yes); return false;"><i class="zocial-pocket fa fa-get-pocket"></i>Pocket<span class="pocket-count"></span></a></li>';
+			$socialSet .= '<li class="sb_pocket"><span></span><a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-save-url="'.$linkUrl.'" data-lang="en"></a><script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script></li>';
 
 			$socialSet .= '</ul></div><!-- [ /.socialSet ] -->';
 			$content .= $socialSet;
