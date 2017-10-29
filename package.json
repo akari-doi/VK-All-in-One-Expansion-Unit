@@ -29,5 +29,8 @@
   },
   "dependencies": {
     "compass": "^0.1.1"
+  },
+	"scripts": {
+    "dist": "gulp dist"
   }
 }
