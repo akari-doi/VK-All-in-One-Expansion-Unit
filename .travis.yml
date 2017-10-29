@@ -12,6 +12,8 @@ branches:
   # - develop
   # - dist_test
 
+# https://torounit.com/blog/2016/01/20/2176/ 途中
+
 env:
   global:
     - GIT_COMMITTER_NAME=travis-ci
@@ -42,3 +44,6 @@ script:
   - gulp compile
   - compass compile
   - cd plugins_admin/vk-admin/ && compass compile && cd ../../
+
+after_success:
+  - bash ./bin/deploy.sh
