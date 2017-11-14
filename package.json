@@ -6,6 +6,9 @@
   "directories": {
     "test": "tests"
   },
+  "scripts": {
+    "dist": "gulp dist"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://kurudrive@github.com/vektor-inc/VK-All-in-One-Expansion-Unit.git"
@@ -31,8 +34,5 @@
   },
   "dependencies": {
     "compass": "^0.1.1"
-  },
-	"scripts": {
-    "dist": "gulp dist"
-  },
+  }
 }
