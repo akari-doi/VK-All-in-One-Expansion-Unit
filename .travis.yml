@@ -10,7 +10,7 @@ php:
 branches:
   # - master
   # - develop
-  # - dist_test
+  - dist_test
 
 # https://torounit.com/blog/2016/01/20/2176/ 途中
 
